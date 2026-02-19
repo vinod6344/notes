@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Settings - {{ settings.site_name }}</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-2xl">
+    <h1 class="text-2xl font-bold text-indigo-600 mb-6">Update Site Settings</h1>
+
+    <form id="settings-form" class="space-y-4">
+      <div>
+        <label class="block font-medium">Site Name</label>
+        <input type="text" name="site_name" value="{{ settings.site_name }}" class="w-full border rounded p-2">
+      </div>
+      <div>
+        <label class="block font-medium">Email</label>
+        <input type="email" name="contact_email" value="{{ settings.contact_email }}" class="w-full border rounded p-2">
+      </div>
+      <div>
+        <label class="block font-medium">Phone</label>
+        <input type="text" name="contact_phone" value="{{ settings.contact_phone }}" class="w-full border rounded p-2">
+      </div>
+      <div>
+        <label class="block font-medium">Address</label>
+        <input type="text" name="contact_address" value="{{ settings.contact_address }}" class="w-full border rounded p-2">
+      </div>
+      <div>
+        <label class="block font-medium">Facebook</label>
+        <input type="url" name="facebook" value="{{ settings.facebook }}" class="w-full border rounded p-2">
+      </div>
+      <div>
+        <label class="block font-medium">Twitter</label>
+        <input type="url" name="twitter" value="{{ settings.twitter }}" class="w-full border rounded p-2">
+      </div>
+      <div>
+        <label class="block font-medium">Instagram</label>
+        <input type="url" name="instagram" value="{{ settings.instagram }}" class="w-full border rounded p-2">
+      </div>
+      <div>
+        <label class="block font-medium">LinkedIn</label>
+        <input type="url" name="linkedin" value="{{ settings.linkedin }}" class="w-full border rounded p-2">
+      </div>
+
+      <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">
+        Save Changes
+      </button>
+    </form>
+
+    <p id="msg" class="text-green-600 mt-4 hidden"></p>
+  </div>
+
+  <script>
+    document.getElementById("settings-form").addEventListener("submit", async function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const response = await fetch("/settings/update", {
+        method: "POST",
+        body: formData
+      });
+      const result = await response.json();
+      document.getElementById("msg").innerText = result.message;
+      document.getElementById("msg").classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>

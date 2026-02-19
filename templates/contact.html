@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us - {{ settings.site_name }}</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+  <!-- Header -->
+  <header class="bg-indigo-600 text-white p-6 shadow-md">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">{{ settings.site_name }}</h1>
+      <nav>
+        <a href="/" class="px-3 hover:underline">Home</a>
+        <a href="/contact" class="px-3 hover:underline">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contact Section -->
+  <main class="container mx-auto p-8 grid grid-cols-1 md:grid-cols-2 gap-10">
+    <!-- Contact Info -->
+    <div>
+      <h2 class="text-2xl font-bold text-indigo-600 mb-6">Contact Information</h2>
+      <div class="space-y-4">
+        <p><strong>Address:</strong> {{ settings.contact_address }}</p>
+        <p><strong>Email:</strong> <a href="mailto:{{ settings.contact_email }}" class="text-indigo-600">{{ settings.contact_email }}</a></p>
+        <p><strong>Phone:</strong> <a href="tel:{{ settings.contact_phone }}" class="text-indigo-600">{{ settings.contact_phone }}</a></p>
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div>
+      <h2 class="text-2xl font-bold text-indigo-600 mb-6">Send us a Message</h2>
+      <form action="/contact" method="POST" class="space-y-4">
+        <input type="text" name="name" placeholder="Name" required class="w-full border rounded p-2">
+        <input type="email" name="email" placeholder="Email" required class="w-full border rounded p-2">
+        <textarea name="message" placeholder="Message" required class="w-full border rounded p-2"></textarea>
+        <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Send Message</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-gray-200 mt-10 p-6 text-center">
+    <p>Email: <a href="mailto:{{ settings.contact_email }}" class="text-indigo-400">{{ settings.contact_email }}</a></p>
+    <p>Phone: <a href="tel:{{ settings.contact_phone }}" class="text-indigo-400">{{ settings.contact_phone }}</a></p>
+    <p>Address: {{ settings.contact_address }}</p>
+    <div class="flex justify-center mt-4 space-x-4">
+      <a href="{{ settings.facebook }}" target="_blank" class="hover:text-white">Facebook</a>
+      <a href="{{ settings.twitter }}" target="_blank" class="hover:text-white">Twitter</a>
+      <a href="{{ settings.instagram }}" target="_blank" class="hover:text-white">Instagram</a>
+      <a href="{{ settings.linkedin }}" target="_blank" class="hover:text-white">LinkedIn</a>
+    </div>
+  </footer>
+
+</body>
+</html>

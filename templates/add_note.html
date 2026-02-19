@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Note</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-xl">
+    <h1 class="text-2xl font-bold text-indigo-600 mb-6">Add a New Note</h1>
+
+    <!-- ✅ Important: method=POST + enctype -->
+    <form action="{{ url_for('add_note') }}" method="POST" enctype="multipart/form-data">
+
+      <div class="mb-4">
+        <label class="block font-medium">Title</label>
+        <input type="text" name="title" required class="w-full border rounded p-2">
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-medium">Description</label>
+        <!-- ✅ Name must be description (not content) -->
+        <textarea name="description" required class="w-full border rounded p-2"></textarea>
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-medium">Branch</label>
+        <select name="branch" required class="w-full border rounded p-2">
+            <option value="Computer Science">Computer Science</option>
+            <option value="Mechanical">Mechanical</option>
+            <option value="Civil">Civil</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-medium">Year</label>
+        <select name="year" required class="w-full border rounded p-2">
+            <option value="1st Year">1st Year</option>
+            <option value="2nd Year">2nd Year</option>
+            <option value="3rd Year">3rd Year</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label class="block font-medium">Upload File (PDF)</label>
+        <input type="file" name="file" accept=".pdf" required class="w-full">
+      </div>
+
+      <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">
+        Upload Note
+      </button>
+
+    </form>
+
+    {% if message %}
+      <p class="text-green-600 mt-4">{{ message }}</p>
+    {% endif %}
+
+  </div>
+</body>
+</html>

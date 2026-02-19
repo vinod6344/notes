@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduNotes - Academic Notes Repository</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .active-nav {
+            border-bottom: 3px solid #667eea;
+            font-weight: bold;
+        }
+        #year-selection, #notes-display { display: none; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold text-indigo-600">
+                        <i class="fas fa-graduation-cap mr-2"></i>
+                        EduNotes
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-indigo-600 font-medium active-nav">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-indigo-600 font-medium">About Us</a>
+                    <a href="#contact" class="text-gray-700 hover:text-indigo-600 font-medium">Contact</a>
+                    <a href="#branches" class="text-gray-700 hover:text-indigo-600 font-medium">Branches</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700" aria-label="Toggle mobile menu" aria-expanded="false">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed top-16 left-0 w-full bg-white shadow-lg hidden z-40">
+        <div class="flex flex-col space-y-4 p-6">
+            <a href="#home" class="text-gray-700 hover:text-indigo-600 font-medium">Home</a>
+            <a href="#about" class="text-gray-700 hover:text-indigo-600 font-medium">About Us</a>
+            <a href="#contact" class="text-gray-700 hover:text-indigo-600 font-medium">Contact</a>
+            <a href="#branches" class="text-gray-700 hover:text-indigo-600 font-medium">Branches</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="pt-20">
+
+        <!-- Home Section -->
+        <section id="home" class="gradient-bg text-white py-20">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center fade-in">
+                    <h1 class="text-5xl font-bold mb-6">Welcome to EduNotes</h1>
+                    <p class="text-xl mb-8 max-w-2xl mx-auto">
+                        Your comprehensive academic companion for engineering studies.
+                        Access well-organized notes, study materials, and resources for all branches.
+                    </p>
+                    <button onclick="scrollToSection('branches')" class="bg-white text-indigo-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300">
+                        Explore Branches <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Why Choose EduNotes?</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center card-hover p-6 rounded-lg">
+                        <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-book text-3xl text-indigo-600"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Comprehensive Notes</h3>
+                        <p class="text-gray-600">Detailed notes covering all subjects with clear explanations and examples.</p>
+                    </div>
+                    <div class="text-center card-hover p-6 rounded-lg">
+                        <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-search text-3xl text-indigo-600"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Easy Navigation</h3>
+                        <p class="text-gray-600">Intuitive branch and year-wise organization for quick access to materials.</p>
+                    </div>
+                    <div class="text-center card-hover p-6 rounded-lg">
+                        <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-download text-3xl text-indigo-600"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Download Resources</h3>
+                        <p class="text-gray-600">Access and download PDFs, presentations, and study materials easily.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-16 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">About Us</h2>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <img src="https://placehold.co/600x400" alt="Team of academic professionals collaborating on educational resources" class="rounded-lg shadow-lg w-full">
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4 text-indigo-600">Our Mission</h3>
+                        <p class="text-gray-700 mb-4">
+                            EduNotes is dedicated to providing high-quality educational resources to engineering students
+                            across various disciplines.
+                        </p>
+                        <p class="text-gray-700 mb-6">
+                            Our team of experienced educators and subject matter experts carefully curates and creates
+                            comprehensive notes that cover the entire curriculum for each branch and year.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-indigo-600">500+</div>
+                                <div class="text-gray-600">Subjects Covered</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-indigo-600">4</div>
+                                <div class="text-gray-600">Engineering Branches</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Branches Section -->
+        <section id="branches" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Select Your Branch</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                    <div class="card-hover cursor-pointer" onclick="selectBranch('cse')">
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-lg text-center">
+                            <i class="fas fa-laptop-code text-3xl mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2">Computer Science</h3>
+                            <p class="text-sm">Programming, Algorithms, Data Structures</p>
+                        </div>
+                    </div>
+                    <div class="card-hover cursor-pointer" onclick="selectBranch('ece')">
+                        <div class="bg-gradient-to-r from-green-500 to-teal-600 text-white p-6 rounded-lg text-center">
+                            <i class="fas fa-microchip text-3xl mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2">Electronics</h3>
+                            <p class="text-sm">Circuits, Signals, Communication</p>
+                        </div>
+                    </div>
+                    <div class="card-hover cursor-pointer" onclick="selectBranch('eee')">
+                        <div class="bg-gradient-to-r from-orange-500 to-red-600 text-white p-6 rounded-lg text-center">
+                            <i class="fas fa-bolt text-3xl mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2">Electrical</h3>
+                            <p class="text-sm">Power Systems, Machines, Control</p>
+                        </div>
+                    </div>
+                    <div class="card-hover cursor-pointer" onclick="selectBranch('civil')">
+                        <div class="bg-gradient-to-r from-gray-600 to-gray-800 text-white p-6 rounded-lg text-center">
+                            <i class="fas fa-hard-hat text-3xl mb-4"></i>
+                            <h3 class="text-xl font-semibold mb-2">Civil</h3>
+                            <p class="text-sm">Structures, Construction, Materials</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Year Selection -->
+        <section id="year-selection" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 text-gray-800" id="branch-title"></h2>
+                <div class="grid md:grid-cols-4 gap-4 mb-8">
+                    <div class="card-hover cursor-pointer" onclick="selectYear(1)">
+                        <div class="bg-indigo-100 p-6 rounded-lg text-center">
+                            <i class="fas fa-1 text-3xl text-indigo-600 mb-3"></i>
+                            <h4 class="font-semibold text-gray-800">First Year</h4>
+                            <p class="text-sm text-gray-600">Basic Sciences & Fundamentals</p>
+                        </div>
+                    </div>
+                    <div class="card-hover cursor-pointer" onclick="selectYear(2)">
+                        <div class="bg-indigo-100 p-6 rounded-lg text-center">
+                            <i class="fas fa-2 text-3xl text-indigo-600 mb-3"></i>
+                            <h4 class="font-semibold text-gray-800">Second Year</h4>
+                            <p class="text-sm text-gray-600">Core Departmental Subjects</p>
+                        </div>
+                    </div>
+                    <div class="card-hover cursor-pointer" onclick="selectYear(3)">
+                        <div class="bg-indigo-100 p-6 rounded-lg text-center">
+                            <i class="fas fa-3 text-3xl text-indigo-600 mb-3"></i>
+                            <h4 class="font-semibold text-gray-800">Third Year</h4>
+                            <p class="text-sm text-gray-600">Advanced Specializations</p>
+                        </div>
+                    </div>
+                    <div class="card-hover cursor-pointer" onclick="selectYear(4)">
+                        <div class="bg-indigo-100 p-6 rounded-lg text-center">
+                            <i class="fas fa-4 text-3xl text-indigo-600 mb-3"></i>
+                            <h4 class="font-semibold text-gray-800">Fourth Year</h4>
+                            <p class="text-sm text-gray-600">Projects & Electives</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notes Display -->
+        <section id="notes-display" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-semibold text-gray-800" id="notes-title"></h3>
+                    <button onclick="goBackToYears()" class="text-indigo-600 hover:text-indigo-800 flex items-center">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Years
+                    </button>
+                </div>
+                <div id="notes-content" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Notes will be populated here -->
+                </div>
+                <div id="notes-loading" class="hidden text-center">
+                    <i class="fas fa-spinner fa-spin text-2xl text-indigo-600"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Get In Touch</h2>
+                <div class="grid md:grid-cols-2 gap-12">
+
+                    <!-- Contact Info -->
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6 text-indigo-600">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-map-marker-alt text-indigo-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Address</p>
+                                    <p class="text-gray-600 contact-address">{{ settings.contact_address }}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-indigo-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Email</p>
+                                    <p class="text-gray-600">
+                                        <a href="mailto:{{ settings.contact_email }}" class="contact-email">{{ settings.contact_email }}</a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-phone text-indigo-600"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Phone</p>
+                                    <p class="text-gray-600">
+                                        <a href="tel:{{ settings.contact_phone }}" class="contact-phone">{{ settings.contact_phone }}</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6 text-indigo-600">Send us a Message</h3>
+                       <form id="contact-form" method="POST" action="/contact/submit" class="space-y-4">
+
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                                <input id="name" name="name" type="text" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                <input id="email" name="email" type="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                                <textarea id="message" name="message" rows="4" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"></textarea>
+                            </div>
+                            <button type="submit" class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">EduNotes</h3>
+                    <p class="text-gray-400">Providing quality educational resources for engineering students worldwide.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#branches" class="text-gray-400 hover:text-white">Branches</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Branches</h4>
+                    <ul class="space-y-2">
+                        <li><span class="text-gray-400">Computer Science</span></li>
+                        <li><span class="text-gray-400">Electronics</span></li>
+                        <li><span class="text-gray-400">Electrical</span></li>
+                        <li><span class="text-gray-400">Civil</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center text-gray-500 mt-8">&copy; 2025 EduNotes. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+        mobileMenuButton.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+
+        // Scroll to section
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+        }
+
+        // Branch selection
+        let selectedBranch = "";
+        function selectBranch(branch) {
+            selectedBranch = branch;
+            document.getElementById("branches").style.display = "none";
+            document.getElementById("year-selection").style.display = "block";
+            document.getElementById("branch-title").innerText = branch.toUpperCase() + " Branch - Select Year";
+        }
+
+        // Year selection
+        let selectedYear = 0;
+        function selectYear(year) {
+            selectedYear = year;
+            document.getElementById("year-selection").style.display = "none";
+            document.getElementById("notes-display").style.display = "block";
+            loadNotes();
+        }
+
+        function goBackToYears() {
+            document.getElementById("notes-display").style.display = "none";
+            document.getElementById("year-selection").style.display = "block";
+        }
+
+        // Fetch notes from API
+        async function loadNotes() {
+            const notesContent = document.getElementById("notes-content");
+            const notesTitle = document.getElementById("notes-title");
+            const notesLoading = document.getElementById("notes-loading");
+
+            notesContent.innerHTML = "";
+            notesTitle.innerText = selectedBranch.toUpperCase() + " - Year " + selectedYear;
+            notesLoading.classList.remove("hidden");
+
+            try {
+                const response = await fetch(`/api/notes/${selectedBranch}/${selectedYear}`, { method: "GET" });
+
+                const notes = await response.json();
+
+                if (notes.length === 0) {
+                    notesContent.innerHTML = `<p class="text-center text-gray-600 col-span-full">No notes available for this branch/year.</p>`;
+                } else {
+                    notes.forEach(note => {
+                        const noteCard = document.createElement("div");
+                        noteCard.className = "card-hover bg-white rounded-lg shadow p-6";
+                        noteCard.innerHTML = `
+                            <h4 class="text-xl font-semibold mb-2">${note.title}</h4>
+                            <p class="text-gray-600 mb-2">${note.description}</p>
+                            <p class="text-sm text-gray-500 mb-4">Pages: ${note.pages} | Type: ${note.type}</p>
+                            <a href="/uploads/${note.download}" target="_blank" class="text-indigo-600 hover:text-indigo-800 font-semibold">Download <i class="fas fa-download ml-1"></i></a>
+                        `;
+                        notesContent.appendChild(noteCard);
+                    });
+                }
+            } catch (error) {
+                notesContent.innerHTML = `<p class="text-center text-red-600 col-span-full">Failed to load notes.</p>`;
+                console.error(error);
+            } finally {
+                notesLoading.classList.add("hidden");
+            }
+        }
+    </script>
+
+</body>
+</html>
