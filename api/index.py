@@ -1,5 +1,7 @@
-def handler(request):
-    return {
-        "statusCode": 200,
-        "body": "Notes App Working Successfully 🚀"
-    }
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def home():
+    return {"message": "Notes App Working 🚀"}
